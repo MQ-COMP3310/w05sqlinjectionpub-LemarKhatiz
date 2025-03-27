@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.io.InputStreamReader;
 //Included for the logging exercise
 import java.io.FileInputStream;
 import java.util.logging.Level;
@@ -68,10 +69,22 @@ public class App {
         }
 
         // let's get them to enter a word
-
+        boolean valid = true;
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter a 4 letter word for a guess or q to quit: ");
-            String guess = scanner.nextLine();
+            String guess = "";
+ 
+            while (true) {
+                guess = scanner.nextLine();
+                
+                valid = guess.length() == 4 && guess.matches("[a-zA-Z]+");
+        
+                if (valid) break;
+                System.out.println("Invalid guess, try again:");
+            }
+
+
+
 
             while (!guess.equals("q")) {
                 System.out.println("You've guessed '" + guess+"'.");
